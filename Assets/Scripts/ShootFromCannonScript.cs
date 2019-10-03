@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Drawing;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,22 +7,24 @@ using DG.Tweening;
 
 public class ShootFromCannonScript : MonoBehaviour
 {
+    private Vector3 cannonLocalPos;
     public GameObject cannonModel;
     private Transform cannonTransform;
+    public GameObject cannonLight;
 
     public ParticleSystem cannonParticleShooter;
     public ParticleSystem chargingParticle;
     public ParticleSystem chargedParticle;
     public ParticleSystem lineParticles;
     public ParticleSystem chargedCannonParticle;
-    // public ParticleSystem chargedEmission;
+    public ParticleSystem chargedEmission;
     // public ParticleSystem muzzleFlash;
 
     public bool activateCharge;
     public bool charging;
     public bool charged;
-    public float holdTime = 1;
-    public float chargeTime = .5f;
+    public float holdTime = 0.5f;
+    public float chargeTime = 0.5f;
 
     private float holdTimer;
     private float chargeTimer;
@@ -35,7 +38,9 @@ public class ShootFromCannonScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cannonTransform = cannonModel.transform;  
+        cannonTransform = cannonModel.transform;
+        cannonLocalPos = cannonTransform.localPosition;
+
     }
 
     // Update is called once per frame
@@ -61,6 +66,13 @@ public class ShootFromCannonScript : MonoBehaviour
                 charged = false;
                 chargedParticle.transform.DOScale(0, .05f).OnComplete(()=>chargedParticle.Clear());
                 lineParticles.Stop();
+
+                Sequence s = DOTween.Sequence();
+                s.Append(cannonTransform.DOPunchPosition(new Vector3(0, 0, -punchStrength), punchDuration, punchVibrato, punchElasticity));
+                Light light = cannonLight.transform.GetComponent<Light>();
+                s.Append(light.DOIntensity(0.0f, 1.0f));
+                // s.Join(cannonModel.GetComponentInChildren<Renderer>().material.DOColor(normalEmissionColor, "_EmissionColor", punchDuration));
+                s.Join(cannonTransform.DOLocalMove(cannonLocalPos, punchDuration).SetDelay(punchDuration));
             }
         }
 
@@ -74,6 +86,11 @@ public class ShootFromCannonScript : MonoBehaviour
                 lineParticles.Play();
                 chargeTimer = Time.time;
 
+                cannonTransform.DOLocalMoveZ(cannonLocalPos.z - .22f, chargeTime);
+                Light light = cannonLight.transform.GetComponent<Light>();
+                light.color = new UnityEngine.Color(1.0f, .49f, 0.0f, 1.0f);
+                light.range = 1.0f;
+                light.DOIntensity(100.0f, 1.0f);
             }
         }
 
@@ -86,6 +103,7 @@ public class ShootFromCannonScript : MonoBehaviour
                 chargedParticle.Play();
                 chargedParticle.transform.localScale = Vector3.zero;
                 chargedParticle.transform.DOScale(1, .4f).SetEase(Ease.OutBack);
+                chargedEmission.Play();
             }
         }
     }
