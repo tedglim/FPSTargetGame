@@ -65,6 +65,7 @@ public class ShootFromCannonScript : MonoBehaviour
                 charging = false;
                 charged = false;
                 chargedParticle.transform.DOScale(0, .05f).OnComplete(()=>chargedParticle.Clear());
+                chargedParticle.Stop();
                 lineParticles.Stop();
 
                 Sequence s = DOTween.Sequence();
