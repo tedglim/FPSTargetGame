@@ -44,6 +44,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         [Header("Custom Settings")]
         public Transform cannonPivot;
+        public Transform helmetPivot;
 
         // Use this for initialization
         private void Start()
@@ -241,7 +242,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             m_MouseLook.LookRotation (transform, m_Camera.transform);
             cannonPivot.rotation = m_Camera.transform.rotation;
-
+            helmetPivot.rotation = m_Camera.transform.rotation;
         }
 
 

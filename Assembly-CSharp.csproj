@@ -60,6 +60,7 @@
      <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
      <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
      <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
+     <Compile Include="Assets\Scripts\FollowFPSController.cs" />
      <Compile Include="Assets\Scripts\HelmetScript.cs" />
      <Compile Include="Assets\Scripts\ParticleCollisionScript.cs" />
      <Compile Include="Assets\Scripts\ShootFromCannonScript.cs" />

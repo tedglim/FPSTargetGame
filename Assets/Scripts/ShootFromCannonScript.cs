@@ -91,7 +91,7 @@ public class ShootFromCannonScript : MonoBehaviour
                 Light light = cannonLight.transform.GetComponent<Light>();
                 light.color = new UnityEngine.Color(1.0f, .49f, 0.0f, 1.0f);
                 light.range = 1.0f;
-                light.DOIntensity(100.0f, 1.0f);
+                light.DOIntensity(40.0f, 1.0f);
             }
         }
 
