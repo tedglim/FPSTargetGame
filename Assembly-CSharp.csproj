@@ -64,6 +64,7 @@
      <Compile Include="Assets\Scripts\HelmetScript.cs" />
      <Compile Include="Assets\Scripts\ParticleCollisionScript.cs" />
      <Compile Include="Assets\Scripts\ShootFromCannonScript.cs" />
+     <Compile Include="Assets\Scripts\TargetScript.cs" />
      <None Include="Assets\Demigiant\DOTween\readme.txt" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>/Users/TedLim/Documents/GitHub/FPSGame/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
