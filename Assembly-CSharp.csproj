@@ -62,9 +62,11 @@
      <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
      <Compile Include="Assets\Scripts\FollowFPSController.cs" />
      <Compile Include="Assets\Scripts\HelmetScript.cs" />
+     <Compile Include="Assets\Scripts\HorizTargetScript.cs" />
      <Compile Include="Assets\Scripts\ParticleCollisionScript.cs" />
      <Compile Include="Assets\Scripts\ShootFromCannonScript.cs" />
-     <Compile Include="Assets\Scripts\TargetScript.cs" />
+     <Compile Include="Assets\Scripts\TargetManagerScript.cs" />
+     <Compile Include="Assets\Scripts\VertTargetScript.cs" />
      <None Include="Assets\Demigiant\DOTween\readme.txt" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>/Users/TedLim/Documents/GitHub/FPSGame/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
