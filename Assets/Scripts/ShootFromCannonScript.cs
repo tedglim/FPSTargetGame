@@ -10,7 +10,8 @@ public class ShootFromCannonScript : MonoBehaviour
     private Vector3 cannonLocalPos;
     public GameObject cannonModel;
     private Transform cannonTransform;
-    public GameObject cannonLight;
+    public GameObject cannonLight00;
+    public GameObject cannonLight01;
 
     public ParticleSystem cannonParticleShooter;
     public ParticleSystem chargingParticle;
@@ -70,8 +71,10 @@ public class ShootFromCannonScript : MonoBehaviour
 
                 Sequence s = DOTween.Sequence();
                 s.Append(cannonTransform.DOPunchPosition(new Vector3(0, 0, -punchStrength), punchDuration, punchVibrato, punchElasticity));
-                Light light = cannonLight.transform.GetComponent<Light>();
-                s.Append(light.DOIntensity(0.0f, 1.0f));
+                Light light00 = cannonLight00.transform.GetComponent<Light>();
+                Light light01 = cannonLight01.transform.GetComponent<Light>();
+                s.Append(light00.DOIntensity(0.0f, 1.0f));
+                s.Append(light01.DOIntensity(0.0f, 1.0f));                
                 // s.Join(cannonModel.GetComponentInChildren<Renderer>().material.DOColor(normalEmissionColor, "_EmissionColor", punchDuration));
                 s.Join(cannonTransform.DOLocalMove(cannonLocalPos, punchDuration).SetDelay(punchDuration));
             }
@@ -88,10 +91,14 @@ public class ShootFromCannonScript : MonoBehaviour
                 chargeTimer = Time.time;
 
                 cannonTransform.DOLocalMoveZ(cannonLocalPos.z - .22f, chargeTime);
-                Light light = cannonLight.transform.GetComponent<Light>();
-                light.color = new UnityEngine.Color(1.0f, .49f, 0.0f, 1.0f);
-                light.range = 1.0f;
-                light.DOIntensity(40.0f, 1.0f);
+                Light light00 = cannonLight00.transform.GetComponent<Light>();
+                Light light01 = cannonLight01.transform.GetComponent<Light>();
+                light00.color = new UnityEngine.Color(1.0f, .49f, 0.0f, 1.0f);
+                light01.color = new UnityEngine.Color(1.0f, .49f, 0.0f, 1.0f);
+                light00.range = 0.5f;
+                light01.range = 0.5f;
+                light00.DOIntensity(50.0f, 1.0f);
+                light01.DOIntensity(50.0f, 1.0f);
             }
         }
 
