@@ -10,8 +10,10 @@ public class ShootFromCannonScript : MonoBehaviour
     private Vector3 cannonLocalPos;
     public GameObject cannonModel;
     private Transform cannonTransform;
-    public GameObject cannonLight00;
-    public GameObject cannonLight01;
+    [SerializeField]
+    private GameObject[] cannonLights;
+    // public GameObject cannonLight00;
+    // public GameObject cannonLight01;
 
     public ParticleSystem cannonParticleShooter;
     public ParticleSystem chargingParticle;
@@ -19,7 +21,7 @@ public class ShootFromCannonScript : MonoBehaviour
     public ParticleSystem lineParticles;
     public ParticleSystem chargedCannonParticle;
     public ParticleSystem chargedEmission;
-    // public ParticleSystem muzzleFlash;
+    public ParticleSystem muzzleFlash;
 
     public bool activateCharge;
     public bool charging;
@@ -51,33 +53,10 @@ public class ShootFromCannonScript : MonoBehaviour
         {
             Shoot();
 
+        } else if (Input.GetMouseButtonDown(1))
+        {
             holdTimer = Time.time;
             activateCharge = true;
-        }
-
-        //RELEASE
-        if (Input.GetMouseButtonUp(0))
-        {
-            activateCharge = false;
-
-            if (charging)
-            {
-                chargedCannonParticle.Play();
-                charging = false;
-                charged = false;
-                chargedParticle.transform.DOScale(0, .05f).OnComplete(()=>chargedParticle.Clear());
-                chargedParticle.Stop();
-                lineParticles.Stop();
-
-                Sequence s = DOTween.Sequence();
-                s.Append(cannonTransform.DOPunchPosition(new Vector3(0, 0, -punchStrength), punchDuration, punchVibrato, punchElasticity));
-                Light light00 = cannonLight00.transform.GetComponent<Light>();
-                Light light01 = cannonLight01.transform.GetComponent<Light>();
-                s.Append(light00.DOIntensity(0.0f, 1.0f));
-                s.Append(light01.DOIntensity(0.0f, 1.0f));                
-                // s.Join(cannonModel.GetComponentInChildren<Renderer>().material.DOColor(normalEmissionColor, "_EmissionColor", punchDuration));
-                s.Join(cannonTransform.DOLocalMove(cannonLocalPos, punchDuration).SetDelay(punchDuration));
-            }
         }
 
         //HOLD CHARGE
@@ -85,20 +64,19 @@ public class ShootFromCannonScript : MonoBehaviour
         {
             if (Time.time - holdTimer > holdTime)
             {
+                chargeTimer = Time.time;                
                 charging = true;
                 chargingParticle.Play();
                 lineParticles.Play();
-                chargeTimer = Time.time;
 
                 cannonTransform.DOLocalMoveZ(cannonLocalPos.z - .22f, chargeTime);
-                Light light00 = cannonLight00.transform.GetComponent<Light>();
-                Light light01 = cannonLight01.transform.GetComponent<Light>();
-                light00.color = new UnityEngine.Color(1.0f, .49f, 0.0f, 1.0f);
-                light01.color = new UnityEngine.Color(1.0f, .49f, 0.0f, 1.0f);
-                light00.range = 0.5f;
-                light01.range = 0.5f;
-                light00.DOIntensity(50.0f, 1.0f);
-                light01.DOIntensity(50.0f, 1.0f);
+                foreach (GameObject cannonLight in cannonLights)
+                {
+                    Light light = cannonLight.transform.GetComponent<Light>();
+                    light.color = new UnityEngine.Color(1.0f, .49f, 0.0f, 1.0f);
+                    light.range = 0.5f;
+                    light.DOIntensity(50.0f, 1.0f);
+                }
             }
         }
 
@@ -114,13 +92,39 @@ public class ShootFromCannonScript : MonoBehaviour
                 chargedEmission.Play();
             }
         }
+
+        //RELEASE
+        if (Input.GetMouseButtonUp(1))
+        {
+            activateCharge = false;
+            if (!charged)
+            {
+                cannonParticleShooter.Play();
+            } else if (charged) {
+                chargedCannonParticle.Play();
+            }
+                charging = false;
+                charged = false;
+                chargedParticle.transform.DOScale(0, .05f).OnComplete(()=>chargedParticle.Clear());
+                chargedParticle.Stop();
+                lineParticles.Stop();
+
+                Sequence s = DOTween.Sequence();
+                s.Append(cannonTransform.DOPunchPosition(new Vector3(0, 0, -punchStrength), punchDuration, punchVibrato, punchElasticity));
+                foreach (GameObject cannonLight in cannonLights)
+                {
+                    Light light = cannonLight.transform.GetComponent<Light>();
+                    s.Append(light.DOIntensity(0.0f, 1.0f));
+                }            
+                s.Join(cannonTransform.DOLocalMove(cannonLocalPos, punchDuration).SetDelay(punchDuration));
+        }
     }
 
     void Shoot()
     {
+        muzzleFlash.Play();
         cannonTransform.DOComplete();
         cannonTransform.DOPunchPosition(new Vector3(0, 0, -punchStrength), punchDuration, punchVibrato, punchElasticity);
-
         cannonParticleShooter.Play();
     }
 }
