@@ -17,7 +17,13 @@ public class VertTargetScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isMovingUp = true;
+        int rand = UnityEngine.Random.Range(0, 2);
+        if (rand == 0)
+        {
+            isMovingUp = true;
+        } else {
+            isMovingUp = false;
+        }
         patrolPointA = transform.position;
         patrolPointB = transform.position;
         patrolPointA.y = patrolPointA.y + radius;

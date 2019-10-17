@@ -16,7 +16,13 @@ public class HorizTargetScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isMovingRight = true;
+        int rand = UnityEngine.Random.Range(0, 2);
+        if (rand == 0)
+        {
+            isMovingRight = true;
+        } else {
+            isMovingRight = false;
+        }
         patrolPointA = transform.position;
         patrolPointB = transform.position;
         patrolPointA.x = patrolPointA.x + radius;
