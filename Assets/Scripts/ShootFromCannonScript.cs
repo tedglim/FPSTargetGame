@@ -64,6 +64,7 @@ public class ShootFromCannonScript : MonoBehaviour
         {
             if (Time.time - holdTimer > holdTime)
             {
+                SoundManagerScript.PlaySound("charge");
                 chargeTimer = Time.time;                
                 charging = true;
                 chargingParticle.Play();
@@ -96,12 +97,17 @@ public class ShootFromCannonScript : MonoBehaviour
         //RELEASE
         if (Input.GetMouseButtonUp(1))
         {
+            SoundManagerScript.StopSound();
             activateCharge = false;
             if (!charged)
             {
                 cannonParticleShooter.Play();
+                muzzleFlash.Play();
+                SoundManagerScript.PlaySound("fire");
             } else if (charged) {
                 chargedCannonParticle.Play();
+                muzzleFlash.Play();
+                SoundManagerScript.PlaySound("fire");
             }
                 charging = false;
                 charged = false;
@@ -123,6 +129,7 @@ public class ShootFromCannonScript : MonoBehaviour
     void Shoot()
     {
         muzzleFlash.Play();
+        SoundManagerScript.PlaySound("fire");
         cannonTransform.DOComplete();
         cannonTransform.DOPunchPosition(new Vector3(0, 0, -punchStrength), punchDuration, punchVibrato, punchElasticity);
         cannonParticleShooter.Play();

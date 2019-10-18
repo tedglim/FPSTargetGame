@@ -2,20 +2,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HorizTargetScript : MonoBehaviour
 {
+    private bool isMovingRight;
     private Vector3 patrolPointA;
     private Vector3 patrolPointB;
     [SerializeField]
     private float radius;
     [SerializeField]
     private float spd;
-    private bool isMovingRight;
     private TargetManagerScript TMScript;
+
+    [SerializeField]
+    private Image hp;
+    [SerializeField]
+    private Image hpBar;
+    [SerializeField]
+    private int maxHealth;
+    private int currHealth;
+
     // Start is called before the first frame update
     void Start()
     {
+        currHealth = maxHealth;
+        hp.enabled = false;
+        hpBar.enabled = false;
+
         int rand = UnityEngine.Random.Range(0, 2);
         if (rand == 0)
         {
@@ -57,6 +71,25 @@ public class HorizTargetScript : MonoBehaviour
 
     void OnParticleCollision(GameObject particle)
     {
+        currHealth--;
+        if (currHealth > 0)
+        {
+            if (particle.name == "ChargedBeamParticle")
+            {
+                CleanupTarget();
+            }
+            hp.enabled = true;
+            hpBar.enabled = true;
+            hp.fillAmount = (float)currHealth / (float)maxHealth;
+            SoundManagerScript.PlaySound("targetHit00");
+        } else {
+            CleanupTarget();
+        }
+    }
+
+    private void CleanupTarget()
+    {
+        SoundManagerScript.PlaySound("targetHit01");
         transform.parent = null;
         Destroy(transform.gameObject);
         print("message some manager");
