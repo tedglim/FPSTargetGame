@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthBarScript : MonoBehaviour
+public class InvisibleWallScript : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,5 +14,10 @@ public class HealthBarScript : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void OnParticleCollision(GameObject particle)
+    {
+        Physics.IgnoreCollision(particle.GetComponent<Collider>(), transform.gameObject.GetComponent<Collider>());
     }
 }

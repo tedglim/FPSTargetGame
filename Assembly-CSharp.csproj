@@ -61,9 +61,9 @@
      <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
      <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
      <Compile Include="Assets\Scripts\FollowFPSController.cs" />
-     <Compile Include="Assets\Scripts\HealthBarScript.cs" />
      <Compile Include="Assets\Scripts\HelmetScript.cs" />
      <Compile Include="Assets\Scripts\HorizTargetScript.cs" />
+     <Compile Include="Assets\Scripts\InvisibleWallScript.cs" />
      <Compile Include="Assets\Scripts\ParticleCollisionScript.cs" />
      <Compile Include="Assets\Scripts\ShootFromCannonScript.cs" />
      <Compile Include="Assets\Scripts\SoundManagerScript.cs" />
