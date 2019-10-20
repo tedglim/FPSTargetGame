@@ -4,21 +4,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VertTargetScript : MonoBehaviour
+public class ZTargetScript : MonoBehaviour
 {
-    private int currHealth;
     [SerializeField]
     private Image hpBar;
     [SerializeField]
     private Image hp;
     [SerializeField]
     private int maxHealth;
+    private int currHealth;
     [SerializeField]
     private float spd;
     [SerializeField]
     private float patrolInterval;
     private float nextTurn;
-    private bool isMovingUp;
+    private bool isMovingForward;
     private TargetManagerScript TMScript;
 
     // Start is called before the first frame update
@@ -31,9 +31,9 @@ public class VertTargetScript : MonoBehaviour
         int rand = UnityEngine.Random.Range(0, 2);
         if (rand == 0)
         {
-            isMovingUp = true;
+            isMovingForward = true;
         } else {
-            isMovingUp = false;
+            isMovingForward = false;
         }
         GameObject parent = GameObject.Find("Environment");
         GameObject tmScript = parent.transform.Find("TargetManager").gameObject;
@@ -46,21 +46,21 @@ public class VertTargetScript : MonoBehaviour
         Patrol();
     }
 
-    void Patrol()
+    private void Patrol()
     {
         if(Time.time < nextTurn)
         {
-            if(isMovingUp)
+            if(isMovingForward)
             {
-                transform.Translate(Vector3.right * spd * Time.deltaTime, Space.World);
+                transform.Translate(Vector3.forward * spd * Time.deltaTime, Space.World);
             } else
             {
-                transform.Translate(Vector3.left * spd * Time.deltaTime, Space.World);
+                transform.Translate(Vector3.back * spd * Time.deltaTime, Space.World);
             }        
         } else 
         {
             nextTurn = patrolInterval + Time.time;
-            isMovingUp = !isMovingUp;
+            isMovingForward = !isMovingForward;
         }
     }
 

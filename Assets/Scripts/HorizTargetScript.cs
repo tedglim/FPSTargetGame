@@ -6,22 +6,20 @@ using UnityEngine.UI;
 
 public class HorizTargetScript : MonoBehaviour
 {
-    private bool isMovingRight;
-    private Vector3 patrolPointA;
-    private Vector3 patrolPointB;
-    [SerializeField]
-    private float radius;
-    [SerializeField]
-    private float spd;
-    private TargetManagerScript TMScript;
-
-    [SerializeField]
-    private Image hp;
     [SerializeField]
     private Image hpBar;
     [SerializeField]
+    private Image hp;
+    [SerializeField]
     private int maxHealth;
     private int currHealth;
+    [SerializeField]
+    private float spd;
+    [SerializeField]
+    private float patrolInterval;
+    private float nextTurn;
+    private bool isMovingRight;
+    private TargetManagerScript TMScript;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +27,7 @@ public class HorizTargetScript : MonoBehaviour
         currHealth = maxHealth;
         hp.enabled = false;
         hpBar.enabled = false;
-
+        nextTurn = patrolInterval/2;
         int rand = UnityEngine.Random.Range(0, 2);
         if (rand == 0)
         {
@@ -37,10 +35,6 @@ public class HorizTargetScript : MonoBehaviour
         } else {
             isMovingRight = false;
         }
-        patrolPointA = transform.position;
-        patrolPointB = transform.position;
-        patrolPointA.x = patrolPointA.x + radius;
-        patrolPointB.x = patrolPointB.x - radius;
         GameObject parent = GameObject.Find("Environment");
         GameObject tmScript = parent.transform.Find("TargetManager").gameObject;
         TMScript = tmScript.GetComponent<TargetManagerScript>();
@@ -52,19 +46,20 @@ public class HorizTargetScript : MonoBehaviour
         Patrol();
     }
 
-    void Patrol()
+    private void Patrol()
     {
-        float distanceA = Math.Abs(patrolPointA.x - transform.position.x);
-        float distanceB = Math.Abs(patrolPointB.x - transform.position.x);
-
-        if (isMovingRight && distanceA > 1.0f)
+        if(Time.time < nextTurn)
         {
-            transform.position = Vector3.MoveTowards(transform.position, patrolPointA, spd);
-        } else if (!isMovingRight && distanceB > 1.0f)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, patrolPointB, spd);
+            if(isMovingRight)
+            {
+                transform.Translate(Vector3.right * spd * Time.deltaTime, Space.World);
+            } else
+            {
+                transform.Translate(Vector3.left * spd * Time.deltaTime, Space.World);
+            }        
         } else 
         {
+            nextTurn = patrolInterval + Time.time;
             isMovingRight = !isMovingRight;
         }
     }
@@ -92,7 +87,6 @@ public class HorizTargetScript : MonoBehaviour
         SoundManagerScript.PlaySound("targetHit01");
         transform.parent = null;
         Destroy(transform.gameObject);
-        print("message some manager");
         TMScript.upTargetNum();
     }
 }

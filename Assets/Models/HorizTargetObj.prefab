@@ -157,7 +157,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  spd: 0.1
+  spd: 4
+  patrolInterval: 2
   hp: {fileID: 6816776657736727672}
   hpBar: {fileID: 4677022751209700314}
   maxHealth: 3

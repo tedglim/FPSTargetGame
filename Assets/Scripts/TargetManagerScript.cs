@@ -10,20 +10,50 @@ public class TargetManagerScript : MonoBehaviour
     private Transform[] horizTargetLocs;
     [SerializeField]
     private Transform[] vertTargetLocs;
+    [SerializeField]
+    private Transform[] zTargetLocs;
+    [SerializeField]
+    private Transform[] section01TargetLocs;
+    [SerializeField]
+    private Transform[] section02TargetLocs;
+    [SerializeField]
+    private Transform[] section03TargetLocs;
+    [SerializeField]
+    private Transform[] section04TargetLocs;
+    [SerializeField]
+    private GameObject[] invisWalls;    
     public Transform targetContainer;
     [SerializeField]
     private GameObject horizTargetObj;
     [SerializeField]
     private GameObject vertTargetObj;
     [SerializeField]
-    private float timeLeft = 30.0f;
+    private GameObject zTargetObj;
+    private int totalTargets;
+    private int currTargets;
+    [SerializeField]
+    private float timeLeft;
     [SerializeField]
     private Text timeText;
-    private int targetNum;
     [SerializeField]
     private Text targetsRemainingText;
+    [SerializeField]
+    private Text titleText;
+    [SerializeField]
+    private Text commandText;
+
+
     // Start is called before the first frame update
     void Start()
+    {
+        makeTargets();
+        upTargetNum();
+        totalTargets = targetContainer.childCount;
+        FormatTime(timeLeft);
+
+    }
+
+    private void makeTargets()
     {
         foreach (Transform entry in horizTargetLocs)
         {
@@ -37,8 +67,46 @@ public class TargetManagerScript : MonoBehaviour
             obj.transform.parent = targetContainer.transform;
         }
 
-        FormatTime(timeLeft);
-        upTargetNum();
+        foreach (Transform entry in zTargetLocs)
+        {
+            GameObject obj = Instantiate(zTargetObj, entry.position, Quaternion.identity);
+            obj.transform.parent = targetContainer.transform;
+        }
+    }
+
+    public void upTargetNum()
+    {
+        currTargets = targetContainer.childCount;
+        int targetsDestroyed = totalTargets - currTargets;
+        if (targetsDestroyed >= (section01TargetLocs.Length + section02TargetLocs.Length))
+        {
+            invisWalls[1].SetActive(false);
+        } else if (targetsDestroyed >= section01TargetLocs.Length)
+        {
+            //remove wallsection1 entrance
+            //make invis wall go away
+            //change text to be "Proceed"
+            commandText.text = "Proceed";
+            invisWalls[0].SetActive(false);
+        }
+        // print(targetNum);
+        //if section 1 targets done
+        //make wall disappear
+        //change visor text
+        //if section 2 targets done
+        targetsRemainingText.text = currTargets.ToString();
+        if(currTargets == 0)
+        {
+            GameOver();
+        }
+    }
+
+    private string FormatTime(float time)
+    {
+         int minutes = (int) time / 60 ;
+         int seconds = (int) time - 60 * minutes;
+         int milliseconds = (int) (1000 * (time - minutes * 60 - seconds));
+         return string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds );
     }
 
     // Update is called once per frame
@@ -63,29 +131,10 @@ public class TargetManagerScript : MonoBehaviour
         }
     }
 
-    public void upTargetNum()
-    {
-        print("Was called");
-        targetNum = targetContainer.childCount;
-        print(targetNum);
-        targetsRemainingText.text = targetNum.ToString();
-        if(targetNum == 0)
-        {
-            GameOver();
-        }
-    }
+
 
     void GameOver()
     {
         SceneManager.LoadSceneAsync(0);
     }
-
-    private string FormatTime(float time)
-    {
-         int minutes = (int) time / 60 ;
-         int seconds = (int) time - 60 * minutes;
-         int milliseconds = (int) (1000 * (time - minutes * 60 - seconds));
-         return string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds );
-    }
-
 }
