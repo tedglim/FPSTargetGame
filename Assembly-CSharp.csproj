@@ -69,6 +69,7 @@
      <Compile Include="Assets\Scripts\SoundManagerScript.cs" />
      <Compile Include="Assets\Scripts\TargetManagerScript.cs" />
      <Compile Include="Assets\Scripts\VertTargetScript.cs" />
+     <Compile Include="Assets\Scripts\WallSectionManagerScript.cs" />
      <Compile Include="Assets\Scripts\WallTriggerScript.cs" />
      <Compile Include="Assets\Scripts\ZTargetScript.cs" />
      <None Include="Assets\Demigiant\DOTween\readme.txt" />

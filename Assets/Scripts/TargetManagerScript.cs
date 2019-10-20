@@ -7,9 +7,9 @@ using UnityEngine.SceneManagement;
 public class TargetManagerScript : MonoBehaviour
 {
     [SerializeField]
-    private Transform[] horizTargetLocs;
+    private Transform[] xTargetLocs;
     [SerializeField]
-    private Transform[] vertTargetLocs;
+    private Transform[] yTargetLocs;
     [SerializeField]
     private Transform[] zTargetLocs;
     [SerializeField]
@@ -20,13 +20,11 @@ public class TargetManagerScript : MonoBehaviour
     private Transform[] section03TargetLocs;
     [SerializeField]
     private Transform[] section04TargetLocs;
-    [SerializeField]
-    private GameObject[] invisWalls;    
     public Transform targetContainer;
     [SerializeField]
-    private GameObject horizTargetObj;
+    private GameObject xTargetObj;
     [SerializeField]
-    private GameObject vertTargetObj;
+    private GameObject yTargetObj;
     [SerializeField]
     private GameObject zTargetObj;
     private int totalTargets;
@@ -41,29 +39,39 @@ public class TargetManagerScript : MonoBehaviour
     private Text titleText;
     [SerializeField]
     private Text commandText;
+    private int[] targetSectionCount = new int[4];
+    private WallSectionManagerScript WSScript;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        makeTargets();
-        upTargetNum();
-        totalTargets = targetContainer.childCount;
-        FormatTime(timeLeft);
+        GameObject parent = GameObject.Find("Environment");
+        GameObject wsScript = parent.transform.Find("WallSectionManager").gameObject;
+        WSScript = wsScript.GetComponent<WallSectionManagerScript>();
 
+        targetSectionCount.SetValue(section01TargetLocs.Length, 0);
+        targetSectionCount.SetValue(section02TargetLocs.Length, 1);
+        targetSectionCount.SetValue(section03TargetLocs.Length, 2);
+        targetSectionCount.SetValue(section04TargetLocs.Length, 3);
+        
+        makeTargets();
+        totalTargets = targetContainer.childCount;
+        upTargetNum();
+        FormatTime(timeLeft);
     }
 
     private void makeTargets()
     {
-        foreach (Transform entry in horizTargetLocs)
+        foreach (Transform entry in xTargetLocs)
         {
-            GameObject obj = Instantiate(horizTargetObj, entry.position, Quaternion.identity);
+            GameObject obj = Instantiate(xTargetObj, entry.position, Quaternion.identity);
             obj.transform.parent = targetContainer.transform;
         }
         
-        foreach (Transform entry in vertTargetLocs)
+        foreach (Transform entry in yTargetLocs)
         {
-            GameObject obj = Instantiate(vertTargetObj, entry.position, Quaternion.identity);
+            GameObject obj = Instantiate(yTargetObj, entry.position, Quaternion.identity);
             obj.transform.parent = targetContainer.transform;
         }
 
@@ -78,27 +86,12 @@ public class TargetManagerScript : MonoBehaviour
     {
         currTargets = targetContainer.childCount;
         int targetsDestroyed = totalTargets - currTargets;
-        if (targetsDestroyed >= (section01TargetLocs.Length + section02TargetLocs.Length))
-        {
-            invisWalls[1].SetActive(false);
-        } else if (targetsDestroyed >= section01TargetLocs.Length)
-        {
-            //remove wallsection1 entrance
-            //make invis wall go away
-            //change text to be "Proceed"
-            commandText.text = "Proceed";
-            invisWalls[0].SetActive(false);
-        }
-        // print(targetNum);
-        //if section 1 targets done
-        //make wall disappear
-        //change visor text
-        //if section 2 targets done
+        WSScript.removeObstacles(targetsDestroyed, targetSectionCount);
         targetsRemainingText.text = currTargets.ToString();
-        if(currTargets == 0)
-        {
-            GameOver();
-        }
+        // if(currTargets == 0)
+        // {
+        //     GameOver();
+        // }
     }
 
     private string FormatTime(float time)
@@ -113,12 +106,6 @@ public class TargetManagerScript : MonoBehaviour
     void Update()
     {
         upTimer();
-
-        // upTargetNum();
-        //update timer
-        //update remaining targets
-        //isGameOver
-
     }
 
     private void upTimer()
@@ -131,9 +118,7 @@ public class TargetManagerScript : MonoBehaviour
         }
     }
 
-
-
-    void GameOver()
+    public void GameOver()
     {
         SceneManager.LoadSceneAsync(0);
     }

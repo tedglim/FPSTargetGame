@@ -52,10 +52,10 @@ public class VertTargetScript : MonoBehaviour
         {
             if(isMovingUp)
             {
-                transform.Translate(Vector3.right * spd * Time.deltaTime, Space.World);
+                transform.Translate(Vector3.up * spd * Time.deltaTime, Space.World);
             } else
             {
-                transform.Translate(Vector3.left * spd * Time.deltaTime, Space.World);
+                transform.Translate(Vector3.down * spd * Time.deltaTime, Space.World);
             }        
         } else 
         {
