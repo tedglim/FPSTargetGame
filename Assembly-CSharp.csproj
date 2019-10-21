@@ -64,6 +64,7 @@
      <Compile Include="Assets\Scripts\HelmetScript.cs" />
      <Compile Include="Assets\Scripts\HorizTargetScript.cs" />
      <Compile Include="Assets\Scripts\InvisibleWallScript.cs" />
+     <Compile Include="Assets\Scripts\MenuScript.cs" />
      <Compile Include="Assets\Scripts\ParticleCollisionScript.cs" />
      <Compile Include="Assets\Scripts\ShootFromCannonScript.cs" />
      <Compile Include="Assets\Scripts\SoundManagerScript.cs" />

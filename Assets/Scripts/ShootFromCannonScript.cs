@@ -41,9 +41,10 @@ public class ShootFromCannonScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         cannonTransform = cannonModel.transform;
         cannonLocalPos = cannonTransform.localPosition;
-
     }
 
     // Update is called once per frame

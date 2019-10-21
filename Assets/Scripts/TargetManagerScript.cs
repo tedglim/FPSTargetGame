@@ -30,22 +30,22 @@ public class TargetManagerScript : MonoBehaviour
     private int totalTargets;
     private int currTargets;
     [SerializeField]
-    private float timeLeft;
+    private float currentTime = 0.0f;
     [SerializeField]
     private Text timeText;
     [SerializeField]
     private Text targetsRemainingText;
-    [SerializeField]
-    private Text titleText;
-    [SerializeField]
-    private Text commandText;
     private int[] targetSectionCount = new int[4];
     private WallSectionManagerScript WSScript;
+    public bool isGameOver;
+    [SerializeField]
+    private GameObject menu;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        isGameOver = false;
         GameObject parent = GameObject.Find("Environment");
         GameObject wsScript = parent.transform.Find("WallSectionManager").gameObject;
         WSScript = wsScript.GetComponent<WallSectionManagerScript>();
@@ -58,7 +58,7 @@ public class TargetManagerScript : MonoBehaviour
         makeTargets();
         totalTargets = targetContainer.childCount;
         upTargetNum();
-        FormatTime(timeLeft);
+        FormatTime(currentTime);
     }
 
     private void makeTargets()
@@ -101,21 +101,29 @@ public class TargetManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        upTimer();
-    }
-
-    private void upTimer()
-    {
-        timeLeft -= Time.deltaTime;
-        timeText.text = FormatTime(timeLeft);
-        if (timeLeft < 0)
+        if(!isGameOver)
+        {
+            upTimer();
+        } else 
         {
             GameOver();
         }
     }
 
+    private void upTimer()
+    {
+        currentTime += Time.deltaTime;
+        timeText.text = FormatTime(currentTime);
+        // if (timeLeft < 0)
+        // {
+        //     GameOver();
+        // }
+    }
+
     public void GameOver()
     {
-        SceneManager.LoadSceneAsync(0);
+        isGameOver = true;
+        menu.SetActive(true);
+        // SceneManager.LoadSceneAsync(0);
     }
 }
