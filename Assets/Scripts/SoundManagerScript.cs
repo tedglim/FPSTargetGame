@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoundManagerScript : MonoBehaviour
 {
-    public static AudioClip fireSound, chargeSound, targetHitSound00, targetHitSound01;
+    public static AudioClip fireSound, chargeSound, targetHitSound00, targetHitSound01, sectionCompleteSound, triggerSound, levelWinSound;
     static AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
@@ -13,7 +13,9 @@ public class SoundManagerScript : MonoBehaviour
         chargeSound = Resources.Load<AudioClip>("chargeSound");
         targetHitSound00 = Resources.Load<AudioClip>("targetSound00");
         targetHitSound01 = Resources.Load<AudioClip>("targetSound01");
-
+        sectionCompleteSound = Resources.Load<AudioClip>("sectionCompleteSound");
+        triggerSound = Resources.Load<AudioClip>("triggerSound");
+        levelWinSound = Resources.Load<AudioClip>("levelWinSound");
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -34,6 +36,15 @@ public class SoundManagerScript : MonoBehaviour
                 break;
             case "targetHit01":
                 audioSource.PlayOneShot(targetHitSound01);
+                break;
+            case "sectionComplete":
+                audioSource.PlayOneShot(sectionCompleteSound);
+                break;
+            case "trigger":
+                audioSource.PlayOneShot(triggerSound);
+                break;
+            case "levelComplete":
+                audioSource.PlayOneShot(levelWinSound);
                 break;
         }
     }

@@ -88,10 +88,6 @@ public class TargetManagerScript : MonoBehaviour
         int targetsDestroyed = totalTargets - currTargets;
         WSScript.removeObstacles(targetsDestroyed, targetSectionCount);
         targetsRemainingText.text = currTargets.ToString();
-        // if(currTargets == 0)
-        // {
-        //     GameOver();
-        // }
     }
 
     private string FormatTime(float time)

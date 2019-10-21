@@ -28,26 +28,28 @@ public class WallSectionManagerScript : MonoBehaviour
 
     public void removeObstacles(int targetsDestroyed, int[] targetSectionCount)
     {
-        // print("targets destroyed" + targetsDestroyed);
-        // print("target Section Count:" + targetSectionCount[0]);
         if (targetsDestroyed >= targetSectionCount[0] + targetSectionCount[1] + targetSectionCount[2] + targetSectionCount[3])
         {
+            SoundManagerScript.PlaySound("levelComplete");
             TMScript.GameOver();
-        } else if (targetsDestroyed >= targetSectionCount[0] + targetSectionCount[1] + targetSectionCount[2])
+        } else if (targetsDestroyed == targetSectionCount[0] + targetSectionCount[1] + targetSectionCount[2])
         {
             obstacles[4].SetActive(false);
             obstacles[5].SetActive(false);
             commandText.text = lastCommand;
-        } else if (targetsDestroyed >= targetSectionCount[0] + targetSectionCount[1])
+            SoundManagerScript.PlaySound("sectionComplete");
+        } else if (targetsDestroyed == targetSectionCount[0] + targetSectionCount[1])
         {
             obstacles[2].SetActive(false);
             obstacles[3].SetActive(false);
             commandText.text = command;
-        } else if (targetsDestroyed >= targetSectionCount[0])
+            SoundManagerScript.PlaySound("sectionComplete");
+        } else if (targetsDestroyed == targetSectionCount[0])
         {
             obstacles[0].SetActive(false);
             obstacles[1].SetActive(false);
             commandText.text = command;
+            SoundManagerScript.PlaySound("sectionComplete");
         }
     }
 }

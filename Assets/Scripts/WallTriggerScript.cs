@@ -35,6 +35,7 @@ public class WallTriggerScript : MonoBehaviour
     {
         if(other.gameObject == player)
         {
+            SoundManagerScript.PlaySound("trigger");
             commandText.text = command;
             titleText.text = title;
             transform.gameObject.SetActive(false);
