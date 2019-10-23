@@ -47,7 +47,7 @@ public class ShootFromCannonScript : MonoBehaviour
         cannonTransform = cannonModel.transform;
         cannonLocalPos = cannonTransform.localPosition;
 
-        GameObject stageObj = GameObject.Find("Stages");
+        GameObject stageObj = GameObject.Find("StageManager");
         stageManagerScript = stageObj.GetComponent<Stage00ManagerScript>();
     }
 

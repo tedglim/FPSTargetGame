@@ -28,7 +28,7 @@ public abstract class DummyScript : MonoBehaviour
         hp.enabled = false;
         hpBar.enabled = false;
 
-        GameObject stageObj = GameObject.Find("Stages");
+        GameObject stageObj = GameObject.Find("StageManager");
         stageManagerScript = stageObj.GetComponent<Stage00ManagerScript>();
     }
 

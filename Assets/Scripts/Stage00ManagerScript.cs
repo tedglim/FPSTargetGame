@@ -38,10 +38,18 @@ public class Stage00ManagerScript : MonoBehaviour
     private float currentTime = 0.0f;
     [SerializeField]
     private Text bestTimeText;
+    [SerializeField]
+    private Text bestEfficiencyText;
+    [SerializeField]
+    private Text currentTimeText;
+    [SerializeField]
+    private Text currentEfficiencyText;
     private int totalTargets;
     private int targetsDestroyed;
     [HideInInspector]
     public bool isGameOver;
+    [SerializeField]
+    private GameObject buttonMenu;    
     [SerializeField]
     private GameObject menu;
     private int shotsTaken;
@@ -82,33 +90,29 @@ public class Stage00ManagerScript : MonoBehaviour
 
     private string FormatTime(float time)
     {
-         int minutes = (int) time / 60 ;
-         int seconds = (int) time - 60 * minutes;
-         int milliseconds = (int) (1000 * (time - minutes * 60 - seconds));
+         int minutes = (int)time / 60 ;
+         int seconds = (int)time - 60 * minutes;
+         int milliseconds = (int)(1000 * (time - minutes * 60 - seconds));
          return string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds );
     }
 
     public void GameOver()
     {
         isGameOver = true;
+        menu.SetActive(true);
+        buttonMenu.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        float hitPercent = (float)shotsHit / (float)shotsTaken;
         if(currentTime < PlayerPrefs.GetFloat("Best", Mathf.Infinity))
         {
             PlayerPrefs.SetFloat("Best", currentTime);
-            //set efficiency with best time
+            PlayerPrefs.SetFloat("Efficiency", hitPercent);
         }
         bestTimeText.text = FormatTime(PlayerPrefs.GetFloat("Best"));
-        Debug.Log("best time: " + bestTimeText.text);
-        Debug.Log("shots hit" + shotsHit);
-        Debug.Log("shots taken" + shotsTaken);
-        //bestTimeText = FormatTime(PlayerPrefs.GetFloat())
-        //show your time
-        //show your efficiency
-
-        //show best time
-        //show efficiency with best time
-        // isGameOver = true;
-        // menu.SetActive(true);
-        // SceneManager.LoadSceneAsync(0);
+        bestEfficiencyText.text = string.Format("Value: {0:P2}.", PlayerPrefs.GetFloat("Efficiency"));
+        currentTimeText.text = FormatTime(currentTime);
+        currentEfficiencyText.text = string.Format("Value: {0:P2}.", hitPercent);
     }
 
     public void CountShots()
@@ -151,6 +155,5 @@ public class Stage00ManagerScript : MonoBehaviour
         rend.material.SetColor("_Color", Color.white);
         stageTitle.text = title;
         stageSubtitle.text = subtitle;
-        //change section text
     }
 }

@@ -6,15 +6,24 @@ using UnityEngine.SceneManagement;
 public class MenuScript : MonoBehaviour
 {
     private bool isMenuOn = false;
+    private Stage00ManagerScript stageManagerScript;
+
+    void Start()
+    {
+        GameObject stageObj = GameObject.Find("StageManager");
+        stageManagerScript = stageObj.GetComponent<Stage00ManagerScript>();
+    }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) && !stageManagerScript.isGameOver)
         {
             if(!isMenuOn)
             {
                 transform.Find("Retry").gameObject.SetActive(true);
                 transform.Find("Quit").gameObject.SetActive(true);
+
+                // transform.Find("Quit").gameObject.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 isMenuOn = !isMenuOn;
@@ -22,8 +31,10 @@ public class MenuScript : MonoBehaviour
             {
                 transform.Find("Retry").gameObject.SetActive(false);
                 transform.Find("Quit").gameObject.SetActive(false);
+
+                // transform.Find("Quit").gameObject.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = true;
+                Cursor.visible = false;
                 isMenuOn = !isMenuOn;
             }
         }
