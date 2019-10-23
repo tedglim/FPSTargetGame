@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{0C89DCFB-3BAD-6C28-6B5B-24F8CAF266D6}</ProjectGuid>
+    <ProjectGuid>{05234E97-2251-4BDD-B2FC-F5F13B5BA6C4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -81,31 +81,31 @@
      <Compile Include="Assets\Scripts\ZTargetScript.cs" />
      <None Include="Assets\Demigiant\DOTween\readme.txt" />
  <Reference Include="Unity.Timeline.Editor">
- <HintPath>/Users/TedLim/Documents/GitHub/FPSGame/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ <HintPath>/Users/TedLim/Documents/GitHub/FPSTargetGame/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VSCode.Editor">
- <HintPath>/Users/TedLim/Documents/GitHub/FPSGame/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+ <HintPath>/Users/TedLim/Documents/GitHub/FPSTargetGame/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>/Users/TedLim/Documents/GitHub/FPSGame/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>/Users/TedLim/Documents/GitHub/FPSTargetGame/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>/Users/TedLim/Documents/GitHub/FPSGame/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ <HintPath>/Users/TedLim/Documents/GitHub/FPSTargetGame/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline">
- <HintPath>/Users/TedLim/Documents/GitHub/FPSGame/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+ <HintPath>/Users/TedLim/Documents/GitHub/FPSTargetGame/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="Unity.CollabProxy.Editor">
- <HintPath>/Users/TedLim/Documents/GitHub/FPSGame/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+ <HintPath>/Users/TedLim/Documents/GitHub/FPSTargetGame/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Rider.Editor">
- <HintPath>/Users/TedLim/Documents/GitHub/FPSGame/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+ <HintPath>/Users/TedLim/Documents/GitHub/FPSTargetGame/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>/Users/TedLim/Documents/GitHub/FPSGame/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>/Users/TedLim/Documents/GitHub/FPSTargetGame/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
- <HintPath>/Users/TedLim/Documents/GitHub/FPSGame/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ <HintPath>/Users/TedLim/Documents/GitHub/FPSTargetGame/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>/Users/TedLim/Documents/UnityEditor/2019.2.6f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -285,7 +285,7 @@
  <HintPath>/Users/TedLim/Documents/UnityEditor/2019.2.6f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
  </Reference>
  <Reference Include="DOTween">
- <HintPath>/Users/TedLim/Documents/GitHub/FPSGame/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
+ <HintPath>/Users/TedLim/Documents/GitHub/FPSTargetGame/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>/Users/TedLim/Documents/UnityEditor/2019.2.6f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
@@ -650,7 +650,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{05F871E1-95ED-BD9C-92F2-1B446E8D2171}</Project>
+      <Project>{6B54F115-ACAC-D5A3-95DD-611FB2C70C66}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
   </ItemGroup>
