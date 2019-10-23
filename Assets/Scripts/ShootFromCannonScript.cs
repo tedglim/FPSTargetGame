@@ -37,6 +37,7 @@ public class ShootFromCannonScript : MonoBehaviour
     public float punchDuration = .3f;
     [Range(0, 1)]
     public float punchElasticity = .5f;
+    private Stage00ManagerScript stageManagerScript;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +46,9 @@ public class ShootFromCannonScript : MonoBehaviour
         Cursor.visible = false;
         cannonTransform = cannonModel.transform;
         cannonLocalPos = cannonTransform.localPosition;
+
+        GameObject stageObj = GameObject.Find("Stages");
+        stageManagerScript = stageObj.GetComponent<Stage00ManagerScript>();
     }
 
     // Update is called once per frame
@@ -103,27 +107,29 @@ public class ShootFromCannonScript : MonoBehaviour
             if (!charged)
             {
                 cannonParticleShooter.Play();
+                stageManagerScript.CountShots();
                 muzzleFlash.Play();
                 SoundManagerScript.PlaySound("fire");
             } else if (charged) {
                 chargedCannonParticle.Play();
+                stageManagerScript.CountShots();                
                 muzzleFlash.Play();
                 SoundManagerScript.PlaySound("fire");
             }
-                charging = false;
-                charged = false;
-                chargedParticle.transform.DOScale(0, .05f).OnComplete(()=>chargedParticle.Clear());
-                chargedParticle.Stop();
-                lineParticles.Stop();
+            charging = false;
+            charged = false;
+            chargedParticle.transform.DOScale(0, .05f).OnComplete(()=>chargedParticle.Clear());
+            chargedParticle.Stop();
+            lineParticles.Stop();
 
-                Sequence s = DOTween.Sequence();
-                s.Append(cannonTransform.DOPunchPosition(new Vector3(0, 0, -punchStrength), punchDuration, punchVibrato, punchElasticity));
-                foreach (GameObject cannonLight in cannonLights)
-                {
-                    Light light = cannonLight.transform.GetComponent<Light>();
-                    s.Append(light.DOIntensity(0.0f, 1.0f));
-                }            
-                s.Join(cannonTransform.DOLocalMove(cannonLocalPos, punchDuration).SetDelay(punchDuration));
+            Sequence s = DOTween.Sequence();
+            s.Append(cannonTransform.DOPunchPosition(new Vector3(0, 0, -punchStrength), punchDuration, punchVibrato, punchElasticity));
+            foreach (GameObject cannonLight in cannonLights)
+            {
+                Light light = cannonLight.transform.GetComponent<Light>();
+                s.Append(light.DOIntensity(0.0f, 0.25f));
+            }            
+            s.Join(cannonTransform.DOLocalMove(cannonLocalPos, punchDuration).SetDelay(punchDuration));
         }
     }
 
@@ -134,5 +140,6 @@ public class ShootFromCannonScript : MonoBehaviour
         cannonTransform.DOComplete();
         cannonTransform.DOPunchPosition(new Vector3(0, 0, -punchStrength), punchDuration, punchVibrato, punchElasticity);
         cannonParticleShooter.Play();
+        stageManagerScript.CountShots();
     }
 }

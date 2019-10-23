@@ -13,8 +13,6 @@ public class MenuScript : MonoBehaviour
         {
             if(!isMenuOn)
             {
-                // print("on");
-                // transform.gameObject.SetActive(true);
                 transform.Find("Retry").gameObject.SetActive(true);
                 transform.Find("Quit").gameObject.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
@@ -22,12 +20,10 @@ public class MenuScript : MonoBehaviour
                 isMenuOn = !isMenuOn;
             } else 
             {
-                // print("off");
                 transform.Find("Retry").gameObject.SetActive(false);
                 transform.Find("Quit").gameObject.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = true;
-                // transform.gameObject.SetActive(false);
                 isMenuOn = !isMenuOn;
             }
         }
@@ -35,7 +31,7 @@ public class MenuScript : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadSceneAsync(0);
+        SceneManager.LoadSceneAsync(1);
     }
 
     public void Quit()
