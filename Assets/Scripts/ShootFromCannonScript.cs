@@ -7,57 +7,72 @@ using DG.Tweening;
 
 public class ShootFromCannonScript : MonoBehaviour
 {
-    private Vector3 cannonLocalPos;
-    public GameObject cannonModel;
     private Transform cannonTransform;
     [SerializeField]
+    private GameObject cannonModel;
+    private Vector3 cannonLocalPos;
+    [SerializeField]
+    private ParticleSystem cannonParticleShooter;
+    [SerializeField]
+    private ParticleSystem muzzleFlash;
+    [SerializeField]
+    private ParticleSystem chargingParticle;
+    [SerializeField]
+    private ParticleSystem lineParticles;
+    [SerializeField]
+    private ParticleSystem chargedParticle;
+    [SerializeField]
+    private ParticleSystem chargedEmission;
+    [SerializeField]
+    private ParticleSystem chargedCannonParticle;
+    [SerializeField]
     private GameObject[] cannonLights;
-    // public GameObject cannonLight00;
-    // public GameObject cannonLight01;
 
-    public ParticleSystem cannonParticleShooter;
-    public ParticleSystem chargingParticle;
-    public ParticleSystem chargedParticle;
-    public ParticleSystem lineParticles;
-    public ParticleSystem chargedCannonParticle;
-    public ParticleSystem chargedEmission;
-    public ParticleSystem muzzleFlash;
-
-    public bool activateCharge;
-    public bool charging;
-    public bool charged;
-    public float holdTime = 0.5f;
-    public float chargeTime = 0.5f;
-
+    private bool activateCharge;
+    private bool charging;
+    private bool charged;
+    [SerializeField]
+    private float holdTime = 0.5f;
     private float holdTimer;
+    [SerializeField]
+    private float chargeTime = 0.5f;
     private float chargeTimer;
 
-    public float punchStrength = .2f;
-    public int punchVibrato = 5;
-    public float punchDuration = .3f;
-    [Range(0, 1)]
+    [SerializeField]
+    private float punchStrength = .2f;
+    [SerializeField]
+    private int punchVibrato = 5;
+    [SerializeField]
+    private float punchDuration = .3f;
+    [SerializeField][Range(0, 1)]
     public float punchElasticity = .5f;
-    private Stage00ManagerScript stageManagerScript;
 
-    // Start is called before the first frame update
+    private bool gameOver;
+    private bool paused;
+
     void Start()
     {
+        GameEventsScript.gameIsOver.AddListener(isGameOver);
+        GameEventsScript.pauseGame.AddListener(isPaused);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
         cannonTransform = cannonModel.transform;
         cannonLocalPos = cannonTransform.localPosition;
-
-        GameObject stageObj = GameObject.Find("StageManager");
-        stageManagerScript = stageObj.GetComponent<Stage00ManagerScript>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if(paused || gameOver)
+        {
+            return;
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             Shoot();
 
+        //PREP CHARGE SHOT
         } else if (Input.GetMouseButtonDown(1))
         {
             holdTimer = Time.time;
@@ -69,13 +84,13 @@ public class ShootFromCannonScript : MonoBehaviour
         {
             if (Time.time - holdTimer > holdTime)
             {
-                SoundManagerScript.PlaySound("charge");
                 chargeTimer = Time.time;                
                 charging = true;
                 chargingParticle.Play();
                 lineParticles.Play();
-
+                SoundManagerScript.PlaySound("charge");
                 cannonTransform.DOLocalMoveZ(cannonLocalPos.z - .22f, chargeTime);
+                
                 foreach (GameObject cannonLight in cannonLights)
                 {
                     Light light = cannonLight.transform.GetComponent<Light>();
@@ -104,18 +119,20 @@ public class ShootFromCannonScript : MonoBehaviour
         {
             SoundManagerScript.StopSound();
             activateCharge = false;
+
             if (!charged)
             {
+                muzzleFlash.Play();
                 cannonParticleShooter.Play();
-                stageManagerScript.CountShots();
-                muzzleFlash.Play();
-                SoundManagerScript.PlaySound("fire");
+                SoundManagerScript.PlaySound("fire");                
+                GameEventsScript.shotCannon.Invoke();                
             } else if (charged) {
-                chargedCannonParticle.Play();
-                stageManagerScript.CountShots();                
                 muzzleFlash.Play();
+                chargedCannonParticle.Play();
                 SoundManagerScript.PlaySound("fire");
+                GameEventsScript.shotCannon.Invoke(); 
             }
+
             charging = false;
             charged = false;
             chargedParticle.transform.DOScale(0, .05f).OnComplete(()=>chargedParticle.Clear());
@@ -133,13 +150,24 @@ public class ShootFromCannonScript : MonoBehaviour
         }
     }
 
+    private void isPaused()
+    {
+        paused = !paused;
+    }
+
+    private void isGameOver()
+    {
+        gameOver = true;
+    }
+
+    //NORMAL SHOT
     void Shoot()
     {
         muzzleFlash.Play();
-        SoundManagerScript.PlaySound("fire");
         cannonTransform.DOComplete();
         cannonTransform.DOPunchPosition(new Vector3(0, 0, -punchStrength), punchDuration, punchVibrato, punchElasticity);
         cannonParticleShooter.Play();
-        stageManagerScript.CountShots();
+        SoundManagerScript.PlaySound("fire");
+        GameEventsScript.shotCannon.Invoke();
     }
 }

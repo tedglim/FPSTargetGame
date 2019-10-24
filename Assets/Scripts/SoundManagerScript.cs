@@ -6,7 +6,7 @@ public class SoundManagerScript : MonoBehaviour
 {
     public static AudioClip fireSound, chargeSound, targetHitSound00, targetHitSound01, sectionCompleteSound, triggerSound, levelWinSound;
     static AudioSource audioSource;
-    // Start is called before the first frame update
+
     void Start()
     {
         fireSound = Resources.Load<AudioClip>("fireSound");
@@ -52,11 +52,5 @@ public class SoundManagerScript : MonoBehaviour
     public static void StopSound()
     {
         audioSource.Stop();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -12,14 +12,14 @@ public abstract class DummyScript : MonoBehaviour
     [SerializeField]
     private int maxHealth;
     private int currHealth;
+
     public List<Transform> patrolPoints;
+
     [HideInInspector]
     public bool isStart;
     [HideInInspector]
     public Vector3 currDestination;
-    private Stage00ManagerScript stageManagerScript;
     
-    // Start is called before the first frame update
     public void Start()
     {
         currHealth = maxHealth;
@@ -27,17 +27,14 @@ public abstract class DummyScript : MonoBehaviour
 
         hp.enabled = false;
         hpBar.enabled = false;
-
-        GameObject stageObj = GameObject.Find("StageManager");
-        stageManagerScript = stageObj.GetComponent<Stage00ManagerScript>();
     }
 
     public void takeDamage(int damage)
     {
-        stageManagerScript.CountShotsHit();
         currHealth = currHealth - damage;
         if (currHealth > 0)
         {
+            GameEventsScript.hitDummy.Invoke(new DummyHitData(false));
             if (damage == 1 || damage == 3){
                 SoundManagerScript.PlaySound("targetHit00");
             } else if (damage == 4 || damage == 8)
@@ -49,8 +46,8 @@ public abstract class DummyScript : MonoBehaviour
             hp.fillAmount = (float)currHealth / (float)maxHealth;
         } else 
         {
+            GameEventsScript.hitDummy.Invoke(new DummyHitData(true));
             Destroy(transform.gameObject);
-            stageManagerScript.ChangeLevel();
         }
     }
 }

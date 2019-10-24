@@ -9,22 +9,20 @@ public class DummyHDVScript : DummyScript
     [SerializeField]
     private float highSpeed;
     private float currSpeed;
-    private int listIndex;
+    private int patrolPointsIndex;
     
-
-    // Update is called once per frame
     void Update()
     {
-        HMove();
+        HDVMove();
     }
 
-    protected void HMove()
+    private void HDVMove()
     {
         if (isStart)
         {
-            listIndex = UnityEngine.Random.Range(0, patrolPoints.Count);
+            patrolPointsIndex = UnityEngine.Random.Range(0, patrolPoints.Count);
             currSpeed = UnityEngine.Random.Range(lowSpeed, highSpeed);
-            currDestination = patrolPoints[listIndex].position;
+            currDestination = patrolPoints[patrolPointsIndex].position;
             isStart = false;
         }
         transform.position = Vector3.MoveTowards(transform.position, currDestination, currSpeed);

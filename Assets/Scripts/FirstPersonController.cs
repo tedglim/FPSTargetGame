@@ -45,10 +45,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [Header("Custom Settings")]
         public Transform cannonPivot;
         public Transform helmetPivot;
+        private bool paused;
+        private bool gameOver;
+
 
         // Use this for initialization
         private void Start()
         {
+            //add event scripts for pause and game over;
+            GameEventsScript.gameIsOver.AddListener(isGameOver);
+            GameEventsScript.pauseGame.AddListener(isPaused);
             m_CharacterController = GetComponent<CharacterController>();
             m_Camera = Camera.main;
             m_OriginalCameraPosition = m_Camera.transform.localPosition;
@@ -65,6 +71,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         private void Update()
         {
+            if(paused || gameOver)
+            {
+                return;
+            }
             RotateView();
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
@@ -85,6 +95,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
+        }
+
+
+        private void isPaused()
+        {
+            paused = !paused;
+        }
+        
+
+        private void isGameOver()
+        {
+            gameOver = true;
         }
 
 

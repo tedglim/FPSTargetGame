@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Stage00ManagerScript : MonoBehaviour
+public class Level01ManagerScript : MonoBehaviour
 {
     [SerializeField]
     private GameObject Stage00;
@@ -47,18 +47,20 @@ public class Stage00ManagerScript : MonoBehaviour
     private int totalTargets;
     private int targetsDestroyed;
     [HideInInspector]
-    public bool isGameOver;
-    [SerializeField]
-    private GameObject buttonMenu;    
+    public bool isGameOver;  
     [SerializeField]
     private GameObject menu;
     private int shotsTaken;
     private int shotsHit;
+    private bool paused;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        GameEventsScript.shotCannon.AddListener(CountShots);
+        GameEventsScript.hitDummy.AddListener(CountShotsHit);
+        GameEventsScript.pauseGame.AddListener(isPaused);
         totalTargets = Stage00Targets.Length + Stage01Targets.Length + Stage02Targets.Length + Stage03Targets.Length;
         targetsDestroyed = 0;
         currentTime = 0;
@@ -69,17 +71,22 @@ public class Stage00ManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(paused)
+        {
+            return;
+        }
         if(!isGameOver)
         {
             upTimer();
         } else 
         {
             GameOver();
-        }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            GameOver();
-        }        
+        }    
+    }
+
+    private void isPaused()
+    {
+        paused = !paused;
     }
 
     private void upTimer()
@@ -99,10 +106,11 @@ public class Stage00ManagerScript : MonoBehaviour
     public void GameOver()
     {
         isGameOver = true;
+        GameEventsScript.gameIsOver.Invoke();
         menu.SetActive(true);
-        buttonMenu.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
         float hitPercent = (float)shotsHit / (float)shotsTaken;
         if(currentTime < PlayerPrefs.GetFloat("Best", Mathf.Infinity))
         {
@@ -115,14 +123,18 @@ public class Stage00ManagerScript : MonoBehaviour
         currentEfficiencyText.text = string.Format("Value: {0:P2}.", hitPercent);
     }
 
-    public void CountShots()
+    private void CountShots()
     {
         shotsTaken++;
     }
 
-    public void CountShotsHit()
+    private void CountShotsHit(DummyHitData data)
     {
         shotsHit++;
+        if(data.changeLevel)
+        {
+            ChangeLevel();
+        }
     }
 
     public void ChangeLevel()
@@ -139,7 +151,6 @@ public class Stage00ManagerScript : MonoBehaviour
             StartCoroutine(TransitionEffects(Stage02, Stage03, stage03TitleText, stage03SubtitleText));
         } else if (targetsDestroyed == Stage00Targets.Length + Stage01Targets.Length + Stage02Targets.Length + Stage03Targets.Length)
         {
-            print("end");
             GameOver();
         }
     }

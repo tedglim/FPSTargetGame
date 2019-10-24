@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class FollowFPSController : MonoBehaviour
 {
+    [SerializeField]
+    private Transform target;
+    [SerializeField]
+    private float lerp;
 
-    public Transform target;
-    public float lerp = .25f;
-
-    // Update is called once per frame
     void Update()
     {
         transform.position = Vector3.Lerp(transform.position, target.position, lerp);

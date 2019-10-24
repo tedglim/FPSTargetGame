@@ -8,21 +8,21 @@ public class DamageScript : MonoBehaviour
     private int normalDamage;
     [SerializeField]
     private int chargeDamage;
-    private DummyScript script;
+    private DummyScript dummyScript;
 
     void Start()
     {
-        script = gameObject.GetComponentInParent<DummyScript>();
+        dummyScript = gameObject.GetComponentInParent<DummyScript>();
     }
 
     void OnParticleCollision(GameObject particle)
     {
         if (particle.name == "NormalBeamParticle")
         {
-            script.takeDamage(normalDamage);
+            dummyScript.takeDamage(normalDamage);
         } else if (particle.name == "ChargedBeamParticle")
         {
-            script.takeDamage(chargeDamage);
+            dummyScript.takeDamage(chargeDamage);
         }
     }
 }
