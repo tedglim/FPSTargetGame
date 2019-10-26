@@ -51,9 +51,9 @@ public abstract class DummyScript : MonoBehaviour
         if (currHealth > 0)
         {
             GameEventsScript.hitDummy.Invoke(new DummyHitData(false));
-            if (damage == normalDmg || damage == normalHeadshotDmg){
+            if (damage == normalDmg || damage == chargeDmg){
                 SoundManagerScript.PlaySound("targetHit00");
-            } else if (damage == chargeDmg || damage == chargeHeadshotDmg)
+            } else if (damage == normalHeadshotDmg || damage == chargeHeadshotDmg)
             {
                 SoundManagerScript.PlaySound("targetHit01");
             }

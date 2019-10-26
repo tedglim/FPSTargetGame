@@ -46,6 +46,12 @@ public class Level01ManagerScript : MonoBehaviour
     public string stage06TitleText;
     public string stage06SubtitleText;
     [SerializeField]
+    private GameObject Stage07;
+    [SerializeField]
+    private GameObject[] Stage07Targets;
+    public string stage07TitleText;
+    public string stage07SubtitleText;
+    [SerializeField]
     private Text stageTitle;
     [SerializeField]
     private Text stageSubtitle;
@@ -71,6 +77,7 @@ public class Level01ManagerScript : MonoBehaviour
     private int shotsTaken;
     private int shotsHit;
     private bool paused;
+    private bool alreadyOver;
 
 
     // Start is called before the first frame update
@@ -79,7 +86,7 @@ public class Level01ManagerScript : MonoBehaviour
         GameEventsScript.shotCannon.AddListener(CountShots);
         GameEventsScript.hitDummy.AddListener(CountShotsHit);
         GameEventsScript.pauseGame.AddListener(isPaused);
-        totalTargets = Stage00Targets.Length + Stage01Targets.Length + Stage02Targets.Length + Stage03Targets.Length + Stage04Targets.Length + Stage05Targets.Length + Stage06Targets.Length;
+        totalTargets = Stage00Targets.Length + Stage01Targets.Length + Stage02Targets.Length + Stage03Targets.Length + Stage04Targets.Length + Stage05Targets.Length + Stage06Targets.Length + Stage07Targets.Length;
         targetsDestroyed = 0;
         currentTime = 0;
         shotsTaken = 0;
@@ -99,7 +106,7 @@ public class Level01ManagerScript : MonoBehaviour
         } else 
         {
             GameOver();
-        }    
+        }
     }
 
     private void isPaused()
@@ -123,6 +130,12 @@ public class Level01ManagerScript : MonoBehaviour
 
     public void GameOver()
     {
+        // SoundManagerScript.StopSound();
+        if(!alreadyOver)
+        {
+            SoundManagerScript.PlaySound("levelComplete");
+            alreadyOver = true;
+        }
         isGameOver = true;
         GameEventsScript.gameIsOver.Invoke();
         menu.SetActive(true);
@@ -177,6 +190,9 @@ public class Level01ManagerScript : MonoBehaviour
         {
             StartCoroutine(TransitionEffects(Stage05, Stage06, stage06TitleText, stage06SubtitleText));
         } else if (targetsDestroyed == Stage00Targets.Length + Stage01Targets.Length + Stage02Targets.Length + Stage03Targets.Length + Stage04Targets.Length + Stage05Targets.Length + Stage06Targets.Length)
+        {
+            StartCoroutine(TransitionEffects(Stage06, Stage07, stage07TitleText, stage07SubtitleText));
+        } else if (targetsDestroyed == Stage00Targets.Length + Stage01Targets.Length + Stage02Targets.Length + Stage03Targets.Length + Stage04Targets.Length + Stage05Targets.Length + Stage06Targets.Length + Stage07Targets.Length)
         {
             GameOver();
         }

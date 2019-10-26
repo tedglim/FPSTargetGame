@@ -34,9 +34,12 @@ public class DummyGridScript : DummyScript
     private bool isFirstRep;
     [SerializeField]
     private bool isMonte;
+    [SerializeField]
+    private bool isInvis;
 
     void OnEnable()
     {
+        GameEventsScript.hitDummy.AddListener(turnInvis);
         points = new List<Point>();
         pointOptions = new List<Point>();
         foreach(Transform position in gridPositions)
@@ -134,5 +137,26 @@ public class DummyGridScript : DummyScript
             pointOptions.Clear();
             isFirstRep = true;
         }  
+    }
+
+    private void turnInvis(DummyHitData data)
+    {
+        if(isInvis)
+        {
+            StartCoroutine(tempInvis());
+        }
+    }
+
+    IEnumerator tempInvis()
+    {
+        for (int i = 0; i < this.transform.childCount; i++)
+        {
+            this.transform.GetChild(i).gameObject.SetActive(false);
+        }
+        yield return new WaitForSeconds(2.0f);
+        for (int i = 0; i < this.transform.childCount; i++)
+        {
+            this.transform.GetChild(i).gameObject.SetActive(true);
+        }
     }
 }
