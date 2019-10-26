@@ -120,6 +120,54 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &69341937
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 69341939}
+  - component: {fileID: 69341938}
+  m_Layer: 11
+  m_Name: PostProcessing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &69341938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69341937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: fdbae2341ffc4449ab45c87fc9b9b969, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
+--- !u!4 &69341939
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69341937}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &81339269
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +338,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7bc1089fab8ea412c99bd7c8584e4a9e, type: 2}
+  - {fileID: 2100000, guid: 3114d1c28ae9e40b285dc2088b573819, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -382,7 +430,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7bc1089fab8ea412c99bd7c8584e4a9e, type: 2}
+  - {fileID: 2100000, guid: 3114d1c28ae9e40b285dc2088b573819, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7403,7 +7451,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7bc1089fab8ea412c99bd7c8584e4a9e, type: 2}
+  - {fileID: 2100000, guid: 3114d1c28ae9e40b285dc2088b573819, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8312,7 +8360,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1e-45, y: NaN, z: 0, w: 4.535939e-34}
+  m_BoundingSphereOverride: {x: 5.992e-42, y: 1.02e-43, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -8529,12 +8577,12 @@ PrefabInstance:
     - target: {fileID: 5661611253904969872, guid: 2842f3da1148e4566a3cbc61a31cc249,
         type: 3}
       propertyPath: lowSpeed
-      value: 0.25
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5661611253904969872, guid: 2842f3da1148e4566a3cbc61a31cc249,
         type: 3}
       propertyPath: highSpeed
-      value: 0.35
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 5661611253904969872, guid: 2842f3da1148e4566a3cbc61a31cc249,
         type: 3}
@@ -14571,7 +14619,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 300
+      scalar: 350
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -19389,7 +19437,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 200
+      scalar: 225
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -39264,12 +39312,12 @@ PrefabInstance:
     - target: {fileID: 5661611253904969872, guid: 2842f3da1148e4566a3cbc61a31cc249,
         type: 3}
       propertyPath: lowSpeed
-      value: 0.3
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 5661611253904969872, guid: 2842f3da1148e4566a3cbc61a31cc249,
         type: 3}
       propertyPath: highSpeed
-      value: 0.35
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 5661611253904969872, guid: 2842f3da1148e4566a3cbc61a31cc249,
         type: 3}
@@ -40266,7 +40314,7 @@ PrefabInstance:
     - target: {fileID: 1498610362397328211, guid: d5955a938ce6a44bfba0a971c55bd66f,
         type: 3}
       propertyPath: currSpeed
-      value: 0.3
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 1498610362397328211, guid: d5955a938ce6a44bfba0a971c55bd66f,
         type: 3}
@@ -41080,6 +41128,7 @@ GameObject:
   - component: {fileID: 1437021489}
   - component: {fileID: 1437021490}
   - component: {fileID: 1437021491}
+  - component: {fileID: 1437021492}
   m_Layer: 0
   m_Name: HelmetCamera
   m_TagString: Untagged
@@ -41158,6 +41207,66 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1614423483}
   lerp: 0.2
+--- !u!114 &1437021492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437021488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 1437021489}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
 --- !u!1 &1446753539
 GameObject:
   m_ObjectHideFlags: 0
@@ -62487,7 +62596,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7bc1089fab8ea412c99bd7c8584e4a9e, type: 2}
+  - {fileID: 2100000, guid: 3114d1c28ae9e40b285dc2088b573819, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -62751,7 +62860,7 @@ PrefabInstance:
     - target: {fileID: 1498610362397328211, guid: d5955a938ce6a44bfba0a971c55bd66f,
         type: 3}
       propertyPath: currSpeed
-      value: 0.3
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 1498610362397328211, guid: d5955a938ce6a44bfba0a971c55bd66f,
         type: 3}
@@ -62953,15 +63062,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_BackGroundColor.r
-      value: 0.31132078
+      value: 0.15686275
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_BackGroundColor.g
-      value: 0.31132078
+      value: 0.15686275
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_BackGroundColor.b
-      value: 0.31132078
+      value: 0.15686275
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_BackGroundColor.a
@@ -62978,6 +63087,10 @@ PrefabInstance:
     - target: {fileID: 2000000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+      propertyPath: field of view
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -63136,6 +63249,72 @@ MonoBehaviour:
   punchVibrato: 5
   punchDuration: 0.3
   punchElasticity: 0.45
+--- !u!1 &1889282689 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100002, guid: 5e9e851c0e142814dac026a256ba2ac0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1889282686}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1889282690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1889282689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 1614423483}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 1
+  m_ShowCustomSorter: 1
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
 --- !u!1 &1894306191
 GameObject:
   m_ObjectHideFlags: 0
@@ -68866,7 +69045,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2051896588}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.27, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1573862331}
@@ -68882,9 +69061,9 @@ Light:
   m_Enabled: 1
   serializedVersion: 9
   m_Type: 2
-  m_Color: {r: 0.48584908, g: 0.9357311, b: 1, a: 1}
-  m_Intensity: 2
-  m_Range: 2
+  m_Color: {r: 0.3066038, g: 0.91531026, b: 1, a: 1}
+  m_Intensity: 2.5
+  m_Range: 2.5
   m_SpotAngle: 165
   m_InnerSpotAngle: 1
   m_CookieSize: 10
@@ -69022,7 +69201,7 @@ PrefabInstance:
     - target: {fileID: 1498610362397328211, guid: d5955a938ce6a44bfba0a971c55bd66f,
         type: 3}
       propertyPath: currSpeed
-      value: 0.25
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 1498610362397328211, guid: d5955a938ce6a44bfba0a971c55bd66f,
         type: 3}
@@ -69507,7 +69686,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7bc1089fab8ea412c99bd7c8584e4a9e, type: 2}
+  - {fileID: 2100000, guid: 3114d1c28ae9e40b285dc2088b573819, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -69661,12 +69840,12 @@ PrefabInstance:
     - target: {fileID: 5661611253904969872, guid: 2842f3da1148e4566a3cbc61a31cc249,
         type: 3}
       propertyPath: lowSpeed
-      value: 0.15
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5661611253904969872, guid: 2842f3da1148e4566a3cbc61a31cc249,
         type: 3}
       propertyPath: highSpeed
-      value: 0.25
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5661611253904969872, guid: 2842f3da1148e4566a3cbc61a31cc249,
         type: 3}
@@ -69942,6 +70121,11 @@ PrefabInstance:
         type: 3}
       propertyPath: maxHealth
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1498610362397328211, guid: d5955a938ce6a44bfba0a971c55bd66f,
+        type: 3}
+      propertyPath: currSpeed
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5955a938ce6a44bfba0a971c55bd66f, type: 3}
