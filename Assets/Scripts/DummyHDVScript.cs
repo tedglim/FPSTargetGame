@@ -25,11 +25,11 @@ public class DummyHDVScript : DummyScript
             currDestination = patrolPoints[patrolPointsIndex].position;
             isStart = false;
         }
-        transform.position = Vector3.MoveTowards(transform.position, currDestination, currSpeed);
         if (Vector3.Distance(transform.position, currDestination) < 0.5f)
         {
             currDestination = patrolPoints[UnityEngine.Random.Range(0, patrolPoints.Count)].position;
             currSpeed = UnityEngine.Random.Range(lowSpeed, highSpeed);
         }
+        transform.position = Vector3.MoveTowards(transform.position, currDestination, currSpeed);
     }
 }

@@ -13,13 +13,29 @@ public abstract class DummyScript : MonoBehaviour
     private int maxHealth;
     private int currHealth;
 
+    [SerializeField]
+    private int normalDmg;
+    [SerializeField]
+    private int normalHeadshotDmg;
+    [SerializeField]
+    private int chargeDmg;
+    [SerializeField]
+    private int chargeHeadshotDmg;    
+
     public List<Transform> patrolPoints;
 
     [HideInInspector]
     public bool isStart;
     [HideInInspector]
     public Vector3 currDestination;
-    
+    [SerializeField]
+    private Text hitType;
+    private bool isBodyShot;
+    [SerializeField]
+    private string bodyHitText;
+    [SerializeField]
+    private string headHitText;
+
     public void Start()
     {
         currHealth = maxHealth;
@@ -35,11 +51,19 @@ public abstract class DummyScript : MonoBehaviour
         if (currHealth > 0)
         {
             GameEventsScript.hitDummy.Invoke(new DummyHitData(false));
-            if (damage == 1 || damage == 3){
+            if (damage == normalDmg || damage == normalHeadshotDmg){
                 SoundManagerScript.PlaySound("targetHit00");
-            } else if (damage == 4 || damage == 8)
+            } else if (damage == chargeDmg || damage == chargeHeadshotDmg)
             {
                 SoundManagerScript.PlaySound("targetHit01");
+            }
+            if (damage == normalDmg || damage == chargeDmg){
+                isBodyShot = true;
+                StartCoroutine(showTextTemp(isBodyShot));
+            } else if (damage == normalHeadshotDmg || damage == chargeHeadshotDmg)
+            {
+                isBodyShot = false;
+                StartCoroutine(showTextTemp(isBodyShot));
             }
             hp.enabled = true;
             hpBar.enabled = true;
@@ -49,5 +73,18 @@ public abstract class DummyScript : MonoBehaviour
             GameEventsScript.hitDummy.Invoke(new DummyHitData(true));
             Destroy(transform.gameObject);
         }
+    }
+
+    IEnumerator showTextTemp(bool isBodyShot)
+    {
+        if(isBodyShot)
+        {
+            hitType.text = bodyHitText;
+        } else 
+        {
+            hitType.text = headHitText;
+        }
+        yield return new WaitForSeconds(.1f);
+        hitType.text = "";
     }
 }

@@ -61,6 +61,7 @@
      <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
      <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
      <Compile Include="Assets\Scripts\DamageScript.cs" />
+     <Compile Include="Assets\Scripts\DummyGridScript.cs" />
      <Compile Include="Assets\Scripts\DummyHDVScript.cs" />
      <Compile Include="Assets\Scripts\DummyScript.cs" />
      <Compile Include="Assets\Scripts\EmptyDummyScript.cs" />

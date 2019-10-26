@@ -28,6 +28,24 @@ public class Level01ManagerScript : MonoBehaviour
     public string stage03TitleText;
     public string stage03SubtitleText;
     [SerializeField]
+    private GameObject Stage04;
+    [SerializeField]
+    private GameObject[] Stage04Targets;
+    public string stage04TitleText;
+    public string stage04SubtitleText;
+    [SerializeField]
+    private GameObject Stage05;
+    [SerializeField]
+    private GameObject[] Stage05Targets;
+    public string stage05TitleText;
+    public string stage05SubtitleText;
+    [SerializeField]
+    private GameObject Stage06;
+    [SerializeField]
+    private GameObject[] Stage06Targets;
+    public string stage06TitleText;
+    public string stage06SubtitleText;
+    [SerializeField]
     private Text stageTitle;
     [SerializeField]
     private Text stageSubtitle;
@@ -35,7 +53,7 @@ public class Level01ManagerScript : MonoBehaviour
     private GameObject startPlatform;
     [SerializeField]
     private Text timeText;
-    private float currentTime = 0.0f;
+    private float currentTime;
     [SerializeField]
     private Text bestTimeText;
     [SerializeField]
@@ -61,7 +79,7 @@ public class Level01ManagerScript : MonoBehaviour
         GameEventsScript.shotCannon.AddListener(CountShots);
         GameEventsScript.hitDummy.AddListener(CountShotsHit);
         GameEventsScript.pauseGame.AddListener(isPaused);
-        totalTargets = Stage00Targets.Length + Stage01Targets.Length + Stage02Targets.Length + Stage03Targets.Length;
+        totalTargets = Stage00Targets.Length + Stage01Targets.Length + Stage02Targets.Length + Stage03Targets.Length + Stage04Targets.Length + Stage05Targets.Length + Stage06Targets.Length;
         targetsDestroyed = 0;
         currentTime = 0;
         shotsTaken = 0;
@@ -150,6 +168,15 @@ public class Level01ManagerScript : MonoBehaviour
         {
             StartCoroutine(TransitionEffects(Stage02, Stage03, stage03TitleText, stage03SubtitleText));
         } else if (targetsDestroyed == Stage00Targets.Length + Stage01Targets.Length + Stage02Targets.Length + Stage03Targets.Length)
+        {
+            StartCoroutine(TransitionEffects(Stage03, Stage04, stage04TitleText, stage04SubtitleText));
+        } else if (targetsDestroyed == Stage00Targets.Length + Stage01Targets.Length + Stage02Targets.Length + Stage03Targets.Length + Stage04Targets.Length)
+        {
+            StartCoroutine(TransitionEffects(Stage04, Stage05, stage05TitleText, stage05SubtitleText));
+        } else if (targetsDestroyed == Stage00Targets.Length + Stage01Targets.Length + Stage02Targets.Length + Stage03Targets.Length + Stage04Targets.Length + Stage05Targets.Length)
+        {
+            StartCoroutine(TransitionEffects(Stage05, Stage06, stage06TitleText, stage06SubtitleText));
+        } else if (targetsDestroyed == Stage00Targets.Length + Stage01Targets.Length + Stage02Targets.Length + Stage03Targets.Length + Stage04Targets.Length + Stage05Targets.Length + Stage06Targets.Length)
         {
             GameOver();
         }
