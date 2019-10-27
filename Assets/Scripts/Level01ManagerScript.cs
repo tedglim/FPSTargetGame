@@ -80,7 +80,6 @@ public class Level01ManagerScript : MonoBehaviour
     private bool alreadyOver;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         GameEventsScript.shotCannon.AddListener(CountShots);
@@ -93,7 +92,6 @@ public class Level01ManagerScript : MonoBehaviour
         shotsHit = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(paused)
@@ -130,7 +128,6 @@ public class Level01ManagerScript : MonoBehaviour
 
     public void GameOver()
     {
-        // SoundManagerScript.StopSound();
         if(!alreadyOver)
         {
             SoundManagerScript.PlaySound("levelComplete");

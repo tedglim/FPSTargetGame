@@ -49,10 +49,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool gameOver;
 
 
-        // Use this for initialization
         private void Start()
         {
-            //add event scripts for pause and game over;
             GameEventsScript.gameIsOver.AddListener(isGameOver);
             GameEventsScript.pauseGame.AddListener(isPaused);
             m_CharacterController = GetComponent<CharacterController>();
@@ -68,7 +66,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
 
 
-        // Update is called once per frame
         private void Update()
         {
             if(paused || gameOver)
