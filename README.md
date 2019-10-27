@@ -7,7 +7,7 @@ This is an FPS Break the Target game made in Unity. The purpose is to clear each
 
 * WASD: Basic movement
 * Left mouse click: Shoot
-* Hold Right mouse button: Charge for Charged Shot
+* Hold Right mouse button: Charge for Charged Shot (More Damage)
 * Tab: Brings up restart menu
 * Shift + WASD: Run
 * Spacebar: Jump
