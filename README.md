@@ -1,7 +1,16 @@
 # FPSGame
-This is an FPS Break the Target game made in Unity. The purpose is to clear each level by shooting the target dummy and reducing its health to 0. Each level gets progressively harder as the target dummy's behavior gets more complex.
+This is an FPS Break the Target game made in Unity. The purpose is to clear each stage by shooting the target dummy and reducing its health to 0. Each level gets progressively harder as the target dummy's behavior gets more complex.
 
 ![](FPSDemo.gif)
+
+<h2>Controls</h2>
+
+* WASD: Basic movement
+* Left mouse click: Shoot
+* Hold Right mouse button: Charge for Charged Shot
+* Tab: Brings up restart menu
+* Shift + WASD: Run
+* Spacebar: Jump
 
 <h2>References</h2>
 <h3>3D Models</h3>
