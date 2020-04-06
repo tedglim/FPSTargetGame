@@ -84,7 +84,7 @@ public abstract class DummyScript : MonoBehaviour
         {
             hitType.text = headHitText;
         }
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.25f);
         hitType.text = "";
     }
 }

@@ -42,7 +42,7 @@ public class MenuScript : MonoBehaviour
     private void showMenu()
     {
         transform.Find("Retry").gameObject.SetActive(true);
-        transform.Find("Quit").gameObject.SetActive(true);
+        // transform.Find("Quit").gameObject.SetActive(true);
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

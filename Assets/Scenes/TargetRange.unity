@@ -8335,8 +8335,8 @@ Light:
   m_InnerSpotAngle: 21.802082
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
-    m_Resolution: -1
+    m_Type: 0
+    m_Resolution: 0
     m_CustomResolution: -1
     m_Strength: 1
     m_Bias: 0.05
@@ -8526,12 +8526,12 @@ PrefabInstance:
     - target: {fileID: 5661611253904969872, guid: 2842f3da1148e4566a3cbc61a31cc249,
         type: 3}
       propertyPath: lowSpeed
-      value: 0.3
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 5661611253904969872, guid: 2842f3da1148e4566a3cbc61a31cc249,
         type: 3}
       propertyPath: highSpeed
-      value: 0.4
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 5661611253904969872, guid: 2842f3da1148e4566a3cbc61a31cc249,
         type: 3}
@@ -14367,7 +14367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amount: {x: 0.85, y: 0.85}
-  lerp: 0.1
+  lerp: 0.02
 --- !u!1 &953929276
 GameObject:
   m_ObjectHideFlags: 0
@@ -14635,7 +14635,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 300
+      scalar: 400
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -19454,7 +19454,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 225
+      scalar: 300
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -39274,12 +39274,12 @@ PrefabInstance:
     - target: {fileID: 5661611253904969872, guid: 2842f3da1148e4566a3cbc61a31cc249,
         type: 3}
       propertyPath: lowSpeed
-      value: 0.35
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 5661611253904969872, guid: 2842f3da1148e4566a3cbc61a31cc249,
         type: 3}
       propertyPath: highSpeed
-      value: 0.4
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 5661611253904969872, guid: 2842f3da1148e4566a3cbc61a31cc249,
         type: 3}
@@ -40338,7 +40338,7 @@ PrefabInstance:
     - target: {fileID: 1498610362397328211, guid: d5955a938ce6a44bfba0a971c55bd66f,
         type: 3}
       propertyPath: currSpeed
-      value: 0.35
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1498610362397328211, guid: d5955a938ce6a44bfba0a971c55bd66f,
         type: 3}
@@ -41233,7 +41233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1614423483}
-  lerp: 0.1
+  lerp: 0.01
 --- !u!114 &1437021492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62900,7 +62900,7 @@ PrefabInstance:
     - target: {fileID: 1498610362397328211, guid: d5955a938ce6a44bfba0a971c55bd66f,
         type: 3}
       propertyPath: currSpeed
-      value: 0.35
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1498610362397328211, guid: d5955a938ce6a44bfba0a971c55bd66f,
         type: 3}
@@ -63245,11 +63245,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_MouseLook.XSensitivity
-      value: 0.85
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_MouseLook.YSensitivity
-      value: 0.85
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+      propertyPath: m_MouseLook.smooth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+      propertyPath: m_MouseLook.smoothTime
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 14300000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_Height
@@ -69246,7 +69254,7 @@ PrefabInstance:
     - target: {fileID: 1498610362397328211, guid: d5955a938ce6a44bfba0a971c55bd66f,
         type: 3}
       propertyPath: currSpeed
-      value: 0.3
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1498610362397328211, guid: d5955a938ce6a44bfba0a971c55bd66f,
         type: 3}
@@ -69831,7 +69839,7 @@ PrefabInstance:
     - target: {fileID: 5661611253904969872, guid: 2842f3da1148e4566a3cbc61a31cc249,
         type: 3}
       propertyPath: highSpeed
-      value: 0.3
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5661611253904969872, guid: 2842f3da1148e4566a3cbc61a31cc249,
         type: 3}
@@ -70171,7 +70179,7 @@ PrefabInstance:
     - target: {fileID: 1498610362397328211, guid: d5955a938ce6a44bfba0a971c55bd66f,
         type: 3}
       propertyPath: currSpeed
-      value: 0.3
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5955a938ce6a44bfba0a971c55bd66f, type: 3}
